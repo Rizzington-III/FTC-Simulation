@@ -1,122 +1,48 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useState } from 'react';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import { Physics } from '@react-three/cannon';
+import SimRobot from'./SimRobot';
+import PedroPathVisualizer from './PedroPathVisualizer';
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function ThreeDSimulation() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <div style={{ width: '100%', height: '100%', position: 'relative' }}>
+      <div style={{ position: 'absolute', top: 20, left: 20, color: 'white', zIndex: 10, pointerEvents: 'none'}}>
+        <h2 style={{ margin: '0 0 5px 0', color: '#ff5500'}}>3D Driver Simulation Mode</h2>
+        <p style={{ margin: 0, color: '#aaa', fontSize: '14px' }}>Controls: <b>W/S</b> (Throttle) | <b>A/D</b> (Turning)</p>
+      </div>
+      <Canvas camera={{ position: [0, 10, 15], fov: 50 }}>
+        <ambientLight intensity={0.6} />
+        <directionalLight position={[10, 20, 10]} intensity={1} />
+        <Physics gravity={[0, -9.81, 0]}>
+          <mesh rotation={[-Math.PI / 2, 0, 0]}>
+          <planetGeometry args={[30, 30]} />
+          <meshStandardMaterial color="#222222" />
+          </mesh>
+          <SimRobot />
+        </Physics>
+        <OrbitControls />
+      </Canvas>
+    </div>
   )
 }
 
-export default App
+export default function App() {
+  const [mode, setMode] = useState('simulation');
+
+  return(
+    <div style={{ width: '100vw', height: '100vh', backgroundColor: '#1e1e24', margin: 0, overflow: 'hidden', display: 'flex', flexDirection: 'column', fontFamily: 'sans-serif' }}>
+      <header style={{ height: '70px', backgroundColor: '#141419', display: 'flex', flexDirection: 'column', fontFamily: 'sans-serif' }}>
+        <h1 style={{ color: '#ff9800', margin: 0, fontSize: '22px' }}>FTC Dashboard Control Center</h1>
+        <div style={{ display: 'flex', gap: '15px' }}>
+          <button onClick={() => setMode('visualizer')} style={{ padding: '10px 20px', backgroundColor: mode === 'visualizer' ? '#9b51e0' : '#2a2a32', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>2D PedroPath Visualizer</button>
+          <button onClick={() => setMode('simulation')} style={{ padding: '10px 20px', backgroundColor: mode === 'simulation' ? '#ff5500' : '#2a2a32', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>3D FTC Driver Simulation</button>
+        </div>
+      </header>
+      <main style={{ flex: 1, position: 'relative', }}>
+        {mode === 'visualizer' ? <PedroPathVisualizer /> : <ThreeDSimulation />}
+      </main>
+    </div>
+  );
+}
