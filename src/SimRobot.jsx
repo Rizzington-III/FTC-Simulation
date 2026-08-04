@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useBox, useFrame, useLoader } from '@react-three/fiber';
+import React, { useEffect, useRef } from 'react';
+import { useFrame, useLoader } from '@react-three/fiber';
+import { useBox } from '@react-three/cannon';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
-import * as THREE from 'three';
 
 export default function SimRobot ({ weight = 15, cadUrl = null}) {
     // ROBOT WEIGHT //
