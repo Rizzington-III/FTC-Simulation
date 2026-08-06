@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Into The Deep Mecanum Path Generator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e24;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 { margin-bottom: 5px; color: #ff9800; }
+        p { margin-top: 0; color: #aaa; }
+        .container {
+            display: flex;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .canvas-container {
+            position: relative;
+        }
+        canvas {
+            border: 4px solid #444;
+            background-color: #2a2a32;
+            cursor: crosshair;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .controls {
+            flex: 1;
+            min-width: 450px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        textarea {
+            width: 100%;
+            height: 500px;
+            background-color: #111;
+            color: #61afef;
+            border: 1px solid #444;
+            font-family: 'Courier New', Courier, monospace;
+            padding: 10px;
+            border-radius: 5px;
+            resize: none;
+            box-sizing: border-box;
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: scroll;
+        }
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn-clear { background-color: #e06c75; color: white; }
+        .btn-clear:hover { background-color: #c45962; }
+        .btn-copy { background-color: #ff9800; color: white; flex-grow: 1; }
+        .btn-copy:hover { background-color: #e68a00; }
+    </style>
+</head>
+<body>
+
+    <h1>FTC Into The Deep Mecanum Path Generator</h1>
+    <p>Click on the field map to draw your autonomous path. Copy the generated LinearOpMode into Android Studio.</p>
+
+    <div class="container">
+        <div class="canvas-container">
+            <canvas id="fieldCanvas" width="600" height="600"></canvas>
+        </div>
+
+        <div class="controls">
+            <div class="btn-group">
+                <button class="btn-clear" onclick="clearPath()">Clear Path</button>
+                <button class="btn-copy" onclick="copyCode()">Copy Java Code</button>
+            </div>
+            <label for="javaOutput">Generated FTC Java Code (with Built-In Encoders):</label>
+            <textarea id="javaOutput" readonly></textarea>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fieldCanvas');
+        const ctx = canvas.getContext('2d');
+        const codeOutput = document.getElementById('javaOutput');
+
+        const FIELD_INCHES = 144; 
+        const CANVAS_SIZE = 600;
+        const SCALE = FIELD_INCHES / CANVAS_SIZE; 
+
+        let waypoints = [];
+        
+        // Load the provided field image as the canvas background
+        const fieldImage = new Image();
+        fieldImage.src = 'field_setup.jpg'; 
+        fieldImage.onload = function() {
+            drawField();
+        };
+
+        function drawField() {
+            ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            
+            // Draw field background image if loaded, otherwise standard dark fill
+            if (fieldImage.complete && fieldImage.naturalWidth !== 0) {
+                ctx.drawImage(fieldImage, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            } else {
+                ctx.fillStyle = '#2a2a32';
+                ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+            }
+            
+            // Draw subtle semi-transparent tile grid lines over the background
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+            ctx.lineWidth = 1;
+            let tileSize = CANVAS_SIZE / 6;
+            for (let i = 1; i < 6; i++) {
+                ctx.beginPath(); ctx.moveTo(i * tileSize, 0); ctx.lineTo(i * tileSize, CANVAS_SIZE); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, i * tileSize); ctx.lineTo(CANVAS_SIZE, i * tileSize); ctx.stroke();
+            }
+
+            // Draw user's path vector lines
+            if (waypoints.length > 0) {
+                ctx.strokeStyle = '#ff9800';
+                ctx.lineWidth = 4;
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+                ctx.shadowBlur = 4;
+                ctx.beginPath();
+                ctx.moveTo(waypoints[0].px, waypoints[0].py);
+                
+                for(let i = 1; i < waypoints.length; i++) {
+                    ctx.lineTo(waypoints[i].px, waypoints[i].py);
+                }
+                ctx.stroke();
+                
+                // Reset shadow settings for individual points
+                ctx.shadowBlur = 0;
+
+                // Draw dots at clicked waypoints
+                waypoints.forEach((point, index) => {
+                    ctx.fillStyle = index === 0 ? '#e06c75' : '#98c379'; 
+                    ctx.beginPath();
+                    ctx.arc(point.px, point.py, 7, 0, 2 * Math.PI);
+                    ctx.fill();
+                    ctx.strokeStyle = '#ffffff';
+                    ctx.lineWidth = 1.5;
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#fff';
+                    ctx.font = 'bold 12px Arial';
+                    ctx.fillText(`P${index}`, point.px + 12, point.py - 5);
+                });
+            }
+        }
+
+        canvas.addEventListener('click', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const px = e.clientX - rect.left;
+            const py = e.clientY - rect.top;
+
+            const inchX = (px * SCALE).toFixed(1);
+            const inchY = ((CANVAS_SIZE - py) * SCALE).toFixed(1);
+
+            waypoints.push({ px, py, x: inchX, y: inchY });
+            
+            drawField();
+            generateJava();
+        });
+
+        function clearPath() {
+            waypoints = [];
+            drawField();
+            generateJava();
+        }
+
+        function generateJava() {
+            let code = `package org.firstinspires.ftc.teamcode;\n\n`;
+            code += `import com.qualcomm.robotcore.eventloop.opmode.Autonomous;\n`;
+            code += `import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;\n`;
+            code += `import com.qualcomm.robotcore.hardware.DcMotor;\n\n`;
+            code += `@Autonomous(name = "GeneratedAuto", group = "Autonomous")\n`;
+            code += `public class GeneratedAuto extends LinearOpMode {\n\n`;
+            code += `    private DcMotor leftFront, rightFront, leftBack, rightBack;\n\n`;
+            code += `    // Odometry & Encoder Tracking Variables\n`;
+            code += `    private double currentX = 0.0;\n`;
+            code += `    private double currentY = 0.0;\n`;
+            code += `    // ADJUST THIS TO YOUR ROBOT (Ticks per rev / Wheel Circumference)\n`;
+            code += `    private static final double TICKS_PER_INCH = 45.28; \n\n`;
+            code += `    @Override\n`;
+            code += `    public void runOpMode() {\n`;
+            code += `        leftFront  = hardwareMap.get(DcMotor.class, "left_front_drive");\n`;
+            code += `        rightFront = hardwareMap.get(DcMotor.class, "right_front_drive");\n`;
+            code += `        leftBack   = hardwareMap.get(DcMotor.class, "left_back_drive");\n`;
+            code += `        rightBack  = hardwareMap.get(DcMotor.class, "right_back_drive");\n\n`;
+            code += `        // Reverse left motors so forward power moves robot forward\n`;
+            code += `        leftFront.setDirection(DcMotor.Direction.REVERSE);\n`;
+            code += `        leftBack.setDirection(DcMotor.Direction.REVERSE);\n\n`;
+            code += `        // Clear encoders at start\n`;
+            code += `        leftFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);\n`;
+            code += `        rightFront.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);\n`;
+            code += `        leftBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);\n`;
+            code += `        rightBack.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);\n\n`;
+            code += `        telemetry.addData("Status", "Initialized");\n`;
+            code += `        telemetry.update();\n\n`;
+            code += `        waitForStart();\n\n`;
+            code += `        if (opModeIsActive()) {\n`;
+            code += `            // --- BEGIN GENERATED PATH ---\n`;
+
+            if (waypoints.length === 0) {
+                code += `            // Click on the website grid map to insert coordinate steps here.\n`;
+            } else {
+                waypoints.forEach((wp, index) => {
+                    code += `            driveToPosition(${wp.x}, ${wp.y}, 0.5); // Waypoint ${index}\n`;
+                });
+            }
+
+            code += `            // --- END GENERATED PATH ---\n`;
+            code += `        }\n`;
+            code += `    }\n\n`;
+            code += `    // Encoder-Based Movement Logic\n`;
+            code += `    public void driveToPosition(double targetX, double targetY, double power) {\n`;
+            code += `        double deltaX = targetX - currentX;\n`;
+            code += `        double deltaY = targetY - currentY;\n\n`;
+            code += `        int moveTicksY = (int)(deltaY * TICKS_PER_INCH);\n`;
+            code += `        int moveTicksX = (int)(deltaX * TICKS_PER_INCH);\n\n`;
+            code += `        int targetLF = leftFront.getCurrentPosition()  + (moveTicksY + moveTicksX);\n`;
+            code += `        int targetRF = rightFront.getCurrentPosition() + (moveTicksY - moveTicksX);\n`;
+            code += `        int targetLB = leftBack.getCurrentPosition()   + (moveTicksY - moveTicksX);\n`;
+            code += `        int targetRB = rightBack.getCurrentPosition()  + (moveTicksY + moveTicksX);\n\n`;
+            code += `        leftFront.setTargetPosition(targetLF);\n`;
+            code += `        rightFront.setTargetPosition(targetRF);\n`;
+            code += `        leftBack.setTargetPosition(targetLB);\n`;
+            code += `        rightBack.setTargetPosition(targetRB);\n\n`;
+            code += `        leftFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);\n`;
+            code += `        rightFront.setMode(DcMotor.RunMode.RUN_TO_POSITION);\n`;
+            code += `        leftBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);\n`;
+            code += `        rightBack.setMode(DcMotor.RunMode.RUN_TO_POSITION);\n\n`;
+            code += `        leftFront.setPower(power);\n`;
+            code += `        rightFront.setPower(power);\n`;
+            code += `        leftBack.setPower(power);\n`;
+            code += `        rightBack.setPower(power);\n\n`;
+            code += `        while (opModeIsActive() && \n`;
+            code += `              (leftFront.isBusy() && rightFront.isBusy() && leftBack.isBusy() && rightBack.isBusy())) {\n`;
+            code += `            telemetry.addData("Moving to X", targetX);\n`;
+            code += `            telemetry.addData("Moving to Y", targetY);\n`;
+            code += `            telemetry.update();\n`;
+            code += `        }\n\n`;
+            code += `        stopMotors();\n`;
+            code += `        currentX = targetX;\n`;
+            code += `        currentY = targetY;\n`;
+            code += `        sleep(250);\n`;
+            code += `    }\n\n`;
+            code += `    public void stopMotors() {\n`;
+            code += `        leftFront.setPower(0); rightFront.setPower(0);\n`;
+            code += `        leftBack.setPower(0);  rightBack.setPower(0);\n`;
+            code += `        leftFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);\n`;
+            code += `        rightFront.setMode(DcMotor.RunMode.RUN_USING_ENCODER);\n`;
+            code += `        leftBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);\n`;
+            code += `        rightBack.setMode(DcMotor.RunMode.RUN_USING_ENCODER);\n`;
+            code += `    }\n`;
+            code += `}\n`;
+            
+            codeOutput.value = code;
+        }
+
+        if (fieldImage.complete) {
+            drawField();
+        }
+        generateJava();
+    </script>
+</body>
+</html>
