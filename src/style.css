@@ -1,15 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap');
+
 :root {
   --midnight-emerald: #0B2912;
   --emerald-light: #165c36;
   --gold: #E1A928;
   --gold-mid: #f3d48a;
   --gold-light: #eedbb0;
-  --ivory: #FDFBF7; 
-  --charcoal: #1C241E;
-  --white: #ffffff;
+  --ivory: #FDFBF7;
   --ivory-cream: #DAC0A7;
   --bisque: #FFE4C4;
+  --white: #FFFFFF;
+  --charcoal: #1C241E;
+
+  --ftc-blue: #0066CC;
+  --ftc-red: #DD2C00;
+  --ftc-orange: #FF5500;
+  --ftc-purple: #702989;
+
+  --retro-green: #10ac51;
+  --dark-gold: #bb9523;
 }
+
+/* ==========================================================================
+   GLOBAL STYLES (Applies to all devices)
+   ========================================================================== */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -17,23 +32,37 @@
 
 body {
   overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
   margin: 0;
   font-family: 'Orbitron', 'Comfortaa', sans-serif;
+
+  p {
+    font-family: 'Comfortaa', sans-serif;
+  }
+
+  background: var(--ivory);
+  color: var(--gold);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-}
 
-/* ==========================================================================
-   HOMEPAGE SPECIFIC STYLES ONLY
-   ========================================================================== */
+  background-color: var(--midnight-emerald);
 
-body.home-page {
-  background: var(--ivory);
-  background-color: var(--ivory);
-  color: var(--gold);
+  /* WALLPAPER GRID */
+  background-image: 
 
-    background-image: 
+    linear-gradient(30deg, color-mix(in srgb, var(--charcoal) 4%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 4%, transparent) 75%),
+    linear-gradient(150deg, color-mix(in srgb, var(--charcoal) 4%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 4%, transparent) 75%),
+    linear-gradient(30deg, color-mix(in srgb, var(--charcoal) 2%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 2%, transparent) 75%),
+    linear-gradient(150deg, color-mix(in srgb, var(--charcoal) 2%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 2%, transparent) 75%),
+
+    /* BG Lines */
     radial-gradient(circle at 15% 25%, transparent 400px, color-mix(in srgb, var(--charcoal) 15%, transparent) 400px, color-mix(in srgb, var(--gold) 15%, transparent) 403px, transparent 403px),
     radial-gradient(circle at 85% 75%, transparent 350px, color-mix(in srgb, var(--charcoal) 12%, transparent) 350px, color-mix(in srgb, var(--charcoal) 12%, transparent) 404px, transparent 404px),
     radial-gradient(circle at 85% 25%, transparent 250px, color-mix(in srgb, var(--gold-light) 12%, transparent) 250px, color-mix(in srgb, var(--charcoal) 12%, transparent) 353px, transparent 353px),
@@ -43,74 +72,44 @@ body.home-page {
     radial-gradient(circle at 50% 15%, transparent 450px, color-mix(in srgb, var(--midnight-emerald) 13%, transparent) 450px, color-mix(in srgb, var(--midnight-emerald) 13%, transparent) 453px, transparent 453px),
     radial-gradient(circle at 50% 85%, transparent 250px, color-mix(in srgb, var(--charcoal) 11%, transparent) 250px, color-mix(in srgb, var(--charcoal) 11%, transparent) 253px, transparent 253px);
 
-    background-size: 
+  background-size: 
     80px 140px, 80px 140px, 
-    40px 70px, 40px 70px, 
-    140% 140%, 140% 140%, 140% 140%, 140% 140%, 140% 140%, 140% 140%, 140% 140%, 140% 140%;
+    40px 70px, 40px 70px,
+    140% 140%, 140% 140%, 140% 140%, 140% 140%,
+    140% 140%, 140% 140%, 140% 140%, 140% 140%;
 
-    background-attachment: fixed;
-    animation: driftWaves 20s ease-in-out infinite alternate;
+  background-attachment: fixed;
+  animation: driftWaves 20s ease-in-out infinite alternate;
 }
 
-body.home-page p {
-  font-family: 'Oxanium', sans-serif;
-}
-
-/* Master Animation Keyframes */
 @keyframes driftWaves {
   0% {
     background-position: 
-      0px 0px, 40px 70px, 
+      0px 0px, 40px 70px,
       0px 0px, 20px 35px, 
       0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
   }
+
   50% {
     background-position: 
-      30px 40px, 70px 110px, 
-      -15px 20px, 5px 55px, 
+      30px 40px, 70px 110px,
+      -15px 20px, 5px 55px,
       8% 12%, -6% 8%, 5% -7%, -10% 6%, 4% 12%, -8% -10%, 10% -5%, -5% 15%;
   }
+
   100% {
     background-position: 
-      -20px -50px, 20px 20px, 
-      25px -30px, 45px 5px, 
+      -2px -50px, 20px 20px,
+      25px -30px, 45px 5px,
       -4% -8%, 10% -4%, -8% 10%, 8% -10%, -6% -4%, 6% 8%, -4% 10%, 8% -6%;
   }
 }
 
-/* Floating Shapes Container */
-body.home-page .floating-shapes-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: 1;
-  overflow: hidden;
-}
+/* ==========================================================================
+   ALWAYS-ON TOP BAR (Custom Color Accents)
+   ========================================================================== */
 
-/* Floating Hexagon Shapes */
-body.home-page .float-hex {
-  position: absolute;
-  fill: none;
-  stroke: url(#goldGradient);
-  stroke-width: 2;
-  opacity: 0.25;
-  animation: floatAnim 12s ease-in-out infinite alternate;
-}
-
-body.home-page .hex-1 { width: 120px; top: 15%; left: 8%; animation-duration: 14s; }
-body.home-page .hex-2 { width: 80px; top: 60%; right: 10%; animation-duration: 10s; }
-body.home-page .hex-3 {  width: 160px; top: 40%; left: 75%; animation-duration: 18s; }
-
-@keyframes floatAnim {
-  0% { transform: translateY(0px) rotate(0deg); }
-  100% { transform: translateY(-30px) rotate(15deg); }
-}
-
-/* HEADER */
-body.home-page .mobile-header {
+.mobile-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,35 +124,39 @@ body.home-page .mobile-header {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
-body.home-page .hamburger-btn {
+.hamburger-btn {
   background-color: var(--midnight-emerald);
   border: none;
   color: var(--gold);
   font-size: 1.6rem;
   width: 45px;
   height: 45px;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color 0.2s ease, color 0.2 ease;
+  padding: 0;
+
   position: relative;
   z-index: 3100;
+
   transition: transform 0.3s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-body.home-page .hamburger-btn:hover {
+.hamburger-bten:hover {
   background-color: var(--gold);
   color: var(--midnight-emerald);
 }
 
-body.home-page .header-right-group {
+.header-right-group {
   display: flex;
   align-items: center;
   gap: 14px;
 }
 
-body.home-page .mobile-brand {
+.mobile-brand {
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
   font-size: 1.2rem;
@@ -162,11 +165,94 @@ body.home-page .mobile-brand {
   color: var(--midnight-emerald);
 }
 
-body.home-page .header-logo {
+.header-logo {
   width: 45px;
   height: 45px;
-  object-fit: cover;
-  border: 2px solid var(--gold);
-  border-radius: 50%;
+  object-fit: cover; 
+  border: 2px solid var(--gold); 
+  border-radius: 50%; 
   background-color: var(--white);
+}
+
+/* ==========================================================================
+   HIDDEN OVERLAY SIDEBAR (Hidden off-screen on all devices until opened)
+   ========================================================================== */
+
+.sidebar {
+  position: fixed;
+  top: 65px;
+  left: -100%;
+  width: 320px;
+  max-width: 100%;
+  height: calc(100vh - 65px);
+  background: var(--white);
+  border-right: 1px solid rgba(11, 41, 18, 0.1);
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  z-index: 1999;
+  transition: left 0.3s ease-in-out;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.05);
+
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  height: 100vh;
+  top: 0;
+  z-index: 3000;
+
+  border-radius: 0 20px 20px 0;
+  overflow: hidden;
+}
+
+.sidebar.active {
+  left: 0;
+}
+
+.brand {
+  color: var(--charcoal);
+  text-align: right;
+  font-size: 30px;
+  font-weight: 1px;
+  letter-spacing: 1px;
+  margin-top: -5px;
+}
+
+.nav {
+  width: 100%;
+  margin-top: 6px;
+}
+
+.nav a {
+  display: block;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav a:hover {
+  display: block;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 12px 16px;
+  font-weight: 700px;
+  border-radius: 8px;
+  margin-bottom: 6px;
+  transition: all 0.2s ease;
+}
+
+.nav a:hover {
+  background: rgba(11, 41, 18, 0.05);
+  color: var(--midnight-emerald);
+}
+
+.nav a.active {
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  color: #fff;
 }
