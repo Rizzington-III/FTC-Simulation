@@ -1,22 +1,186 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>HOME - FTC Simulator</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https:.//fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
-    <meta name="viewport" content="width=device-width,intial-scale=1.0">
-  </head>
-  <body>
-    <button id="menuToggle" class="hamburger-btn">☰</button>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Home - Emerald Engineers</title>
+<link rel="stylesheet" href="style.css">
 
-    <div class="header-right-group">
-      <div class="mobile-brand">The Emerald Engineers</div>
-      <img src="Images/currentLogo.png" alt="The Emerald Engineeres Logo" class="header-logo">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alata&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap" rel="stylesheet">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head> 
+<body>
+
+<div class="mobile-header">
+  <button id="menuToggle" class="hamburger-btn">☰</button>
+  
+  
+  <div class="header-right-group">
+    <div class="mobile-brand">The Emerald Engineers</div>
+    <img src="Images/currentLogo.png" alt="The Emerald Engineers Logo" class="header-logo">
+  </div>
+</div>
+
+<aside class="sidebar">
+  <button id="sidebarClose" class="sidebar-close-btn">✕</button>
+
+  <div class="brand">
+    MENU
+    <br>
+  </div>
+  <nav class="nav">
+  <a href="index.html" class="active">Home</a>
+  <a href="about.html">About Us</a>
+  <a href="team.html">Meet the Team</a>
+  
+  <details class="dropdown">
+    <summary class="dropdown-title">
+      Resources
+      <span class="arrow-circle"><span class="arrow"></span></span> 
+    </summary>
+    <div class="dropdown-subpages">
+      <a href="robot.html">Our Robot</a>
+      <a href="mission.html">Mission Statement</a>
+      <a href="outreach.html">Outreach</a>
+      <a href="programs.html">Programs</a>
+      <a href="articleHub.html">Article Hub</a>
     </div>
-  </body>
+  </details>
+  
+  <a href="gallery.html">Team Gallery</a>
+  <a href="sponsors.html">Sponsor Us</a>
+  <a href="feedback.html">Feedback</a>
+</nav>
+
+<div class="sidebar-contact">
+    <h4>Connect With Us</h4>
+    <p class="contact-email">
+      📧 <a href="mailto:emeraldengineers10@gmail.com">emeraldengineers10@gmail.com</a>
+    </p>
+    <div class="sidebar-socials">
+      <a href="https://instagram.com/yourteam" target="_blank">
+        <img src="images/instagram-logo.jpg" alt="Instagram" class="sidebar-contact-icon">
+        Instagram
+      </a>
+      <a href="https://github.com/32483-The-Emerald-Engineers/The-Emerald-Engineers-32483-FTC" target="_blank">
+        <img src="images/github-logo.jpg" alt="GitHub" class="sidebar-contact-icon">
+        GitHub
+      </a>
+    </div>
+  </div>
+</aside>
+    
+<div class="container">
+
+<div class="hero">
+  <span class="header-badge">Team #32483</span>
+  <h1 class="mainPage-Headers">THE EMERALD ENGINEERS</h1>
+  <p class="major-Text">We are a passionate high school robotics team competing in FTC. Explore our robots, projects, outreach, and engineering journey.</p>
+  <div class="buttons">
+    <a class="button" href="team.html">Meet the Team</a>
+    <a class="button outline" href="https://www.youtube.com/@EmeraldEngineers">YouTube</a>
+    <a class="button" href="sponsors.html">Become a Sponsor</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><strong>6</strong><div>Team Members</div></div>
+    <div class="stat"><strong>3+</strong><div>Active Projects</div></div>
+    <div class="stat"><strong>2nd</strong><div>Latest Placement</div></div>
+  </div>
+</div>
+
+<section class="projects">
+  <h2>Latest Innovations</h2>
+  <div class="grid">
+    <div class="card"><h3>FTC Simulator (Coming Soon!)</h3><p>Our upcoming FTC simulator is undergoing development. This easy-to-access simulator will contain several maps and provide teams with a pedropathing environment as well as a regular coding environment. Teams will be able to test code, input CAD models of their own robots, and be able to use an AI chatbot to improve their code!</p></div>
+    <div class="card"><img src="images/LogitechCam.jpeg" alt="team"><h3>AprilTag Detection</h3><p>We will be using a Logitech C270 camera fro AprilTag detection, we will use this to find postions and Motifs for this season..</p></div>
+    <div class="card"><img src="images/ARC.jpg" alt="outreach"><h3>FTC Decode Bot: ARC</h3><p>Our first robot that we created in our rookie year, known as ARC. Click to find out more about ARC and what he can do!</p></div>
+  </div>
+</section>
+<section style="margin-top:22px" class="projects">
+  <h2>BIOBUZZ Season Reveal</h2>
+  <p class="countdownSubheading">Get ready for the FIRST Tech Challenge BIOBUZZ Season (2026-27) Reveal on September 12th!!!</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Countdown</h3>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+        <div class="stat"><strong id="comp-days">00</strong><div>Days</div></div>
+        <div class="stat"><strong id="comp-hours">00</strong><div>Hours</div></div>
+        <div class="stat"><strong id="comp-minutes">00</strong><div>Minutes</div></div>
+        <div class="stat"><strong id="comp-seconds">00</strong><div>Seconds</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Latest News</h3>
+      <p>  &DoubleLongRightArrow; We are excited to announce our first ever program: <a href="programs.html">EMERALD APPRENTICESHIP</a>. A 4-day camp that teaches student's about robotics. Click on the link to learn more!</p>
+      <p>  &DoubleLongRightArrow; Get excited for the upcoming FTC simulator with mind-blowing</p>
+    </div>
+  </div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (typeof startCountdown === 'function') {
+      startCountdown('2026-09-12T02:00:00', 'comp');
+    } else {
+      console.error('startCountdown function is not loaded yet! check your script tags.');
+    }
+  });
+</script>
+
+<footer class="site-footer">
+  <div style="max-width: 1200px; margin: auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 30px;">
+    
+    <div style="flex: 1; min-width: 80px;">
+      <h3 style="margin-top: 0; font-size: 1.4em;">The Emerald Engineers</h3>
+      <p style="margin: 0;">
+        FTC Team #32483<br>
+      </p>
+    </div>
+
+    <div style="flex: 1; min-width: 180px;">
+      <h4 style="margin-bottom: 10px;">Quick Links</h4>
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <li><a href="about.html" style="color: #004d00; text-decoration: none;">About Us</a></li>
+        <li><a href="mission.html" style="color: #004d00; text-decoration: none;">Our Mission</a></li>
+        <li><a href="team.html" style="color: #004d00; text-decoration: none;">Team Members</a></li>
+        <li><a href="robot.html" style="color: #004d00; text-decoration: none;">Our Robot</a></li>
+      </ul>
+    </div>
+
+    <div style="flex: 1; min-width: 180px;">
+      <h4 style="margin-bottom: 1px;">Resources</h4>
+      <ul style="list-style: none; padding: 0; margin: 0;">
+        <li><a href="outreach.html" style="color: #004d00; text-decoration: none;">Outreach Programs</a></li>
+        <li><a href="sponsors.html" style="color: #004d00; text-decoration: none;">Become a Sponsor</a></li>
+        <li><a href="gallery.html" style="color: #004d00; text-decoration: none;">Photo Gallery</a></li>
+        <li><a href="contact.html" style="color: #004d00; text-decoration: none;">Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div style="flex: 2; min-width: 220px;">
+      <h4 style="margin-bottom: 10px;">Connect With Us</h4>
+      <p style="margin: 0;">
+        Dublin, Ohio<br>
+        <span style="word-break: break-word;">
+          <a href="mailto:emeraldengineers10@gmail.com" style="color: #004d00;">emeraldengineers10@gmail.com</a>
+        </span><br>
+        Instagram: <a href="https://instagram.com/EmeraldEngineers" target="_blank" style="color: #004d00;">@EmeraldEngineers</a>
+      </p>
+    </div>
+  </div>
+
+  <hr style="border-color: rgba(0, 77, 0, 0.2); margin: 30px 0;">
+  <p style="text-align: center; font-size: 0.9em; margin: 0;">
+    © 2026 The Emerald Engineers - FTC Team #32483. All rights reserved.<br>
+    Powered by FIRST Tech Challenge
+  </p>
+</footer>
+</div>
+<script src="main.js"></script>
+<script src="floatingShapes.js"></script>
+</body>
 </html>
