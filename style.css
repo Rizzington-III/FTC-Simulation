@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Monoton&family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alien+Block&family=Bitcount+Prop+Double:wght@100..900&family=Monoton&family=Oxanium:wght@200..800&display=swap');
 
 :root {
   --midnight-emerald: #0B2912;
@@ -20,6 +22,27 @@
 
   --retro-green: #10ac51;
   --dark-gold: #bb9523;
+
+  /*-------------------------------*/
+  /*
+  Color Palette (rbga format):
+    --midnight-emerald: rgba(11, 41, 18, 1.0); 
+    --emerald-light:    rgba(22, 92, 54, 1.0);   
+    --gold:             rgba(225, 169, 40, 1.0); 
+    --gold-mid:         rgba(243, 212, 138, 1.0);
+    --gold-light:       rgba(238, 219, 176, 1.0);
+    --ivory:            rgba(253, 251, 247, 1.0);
+    --ivory-cream:      rgba(218, 192, 167, 1.0);
+    --bisque:           rgba(255, 228, 196, 1.0);
+    --white:            rgba(255, 255, 255, 1.0);
+    --charcoal:         rgba(28, 36, 30, 1.0);
+    --ftc-blue:         rgba(0, 102, 204, 1.0);
+    --ftc-red:          rgba(221, 44, 0, 1.0);
+    --ftc-orange:       rgba(255, 85, 0, 1.0);
+    --ftc-purple:       rgba(112, 41, 137, 1.0);
+    --retro-green:      rgba(16, 172, 81, 1.0);
+    --dark-gold:        rgba(187, 149, 35, 1.0);
+  */
 }
 
 /* ==========================================================================
@@ -67,25 +90,25 @@ body {
   display: flex;
   flex-direction: column;
 
-  background-color: var(--retro-green);
+  background-color: var(--charcoal);
 
   /* WALLPAPER GRID */
   background-image: 
 
-    linear-gradient(30deg, color-mix(in srgb, var(--charcoal) 4%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 4%, transparent) 75%),
-    linear-gradient(150deg, color-mix(in srgb, var(--charcoal) 4%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 4%, transparent) 75%),
-    linear-gradient(30deg, color-mix(in srgb, var(--charcoal) 2%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 2%, transparent) 75%),
-    linear-gradient(150deg, color-mix(in srgb, var(--charcoal) 2%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 2%, transparent) 75%),
+    linear-gradient(30deg, color-mix(in srgb, var(--ivory) 4%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 4%, transparent) 75%),
+    linear-gradient(150deg, color-mix(in srgb, var(--ivory) 4%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 4%, transparent) 75%),
+    linear-gradient(30deg, color-mix(in srgb, var(--ivory) 2%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 2%, transparent) 75%),
+    linear-gradient(150deg, color-mix(in srgb, var(--ivory) 2%, transparent) 25%, transparent 25%, transparent 75%, color-mix(in srgb, var(--charcoal) 2%, transparent) 75%),
 
     /* BG Lines */
-    radial-gradient(circle at 15% 25%, transparent 400px, color-mix(in srgb, var(--charcoal) 15%, transparent) 400px, color-mix(in srgb, var(--gold) 15%, transparent) 403px, transparent 403px),
-    radial-gradient(circle at 85% 75%, transparent 350px, color-mix(in srgb, var(--charcoal) 12%, transparent) 350px, color-mix(in srgb, var(--charcoal) 12%, transparent) 404px, transparent 404px),
+    radial-gradient(circle at 15% 25%, transparent 400px, color-mix(in srgb, var(--white) 15%, transparent) 400px, color-mix(in srgb, var(--gold) 15%, transparent) 403px, transparent 403px),
+    radial-gradient(circle at 85% 75%, transparent 350px, color-mix(in srgb, var(--white) 12%, transparent) 350px, color-mix(in srgb, var(--charcoal) 12%, transparent) 404px, transparent 404px),
     radial-gradient(circle at 85% 25%, transparent 250px, color-mix(in srgb, var(--gold-light) 12%, transparent) 250px, color-mix(in srgb, var(--charcoal) 12%, transparent) 353px, transparent 353px),
-    radial-gradient(circle at 15% 75%, transparent 350px, color-mix(in srgb, var(--charcoal) 14%, transparent) 350px, color-mix(in srgb, var(--charcoal) 14%, transparent) 352px, transparent 352px),
+    radial-gradient(circle at 15% 75%, transparent 350px, color-mix(in srgb, var(--white) 14%, transparent) 350px, color-mix(in srgb, var(--charcoal) 14%, transparent) 352px, transparent 352px),
     radial-gradient(circle at 75% 45%, transparent 200px, color-mix(in srgb, var(--gold) 10%, transparent) 200px, color-mix(in srgb, var(--gold-light) 10%, transparent) 252px, transparent 252px),
-    radial-gradient(circle at 25% 45%, transparent 200px, color-mix(in srgb, var(--charcoal) 10%, transparent) 200px, color-mix(in srgb, var(--charcoal) 10%, transparent) 252px, transparent 252px),
+    radial-gradient(circle at 25% 45%, transparent 200px, color-mix(in srgb, var(--white) 10%, transparent) 200px, color-mix(in srgb, var(--charcoal) 10%, transparent) 252px, transparent 252px),
     radial-gradient(circle at 50% 15%, transparent 450px, color-mix(in srgb, var(--midnight-emerald) 13%, transparent) 450px, color-mix(in srgb, var(--midnight-emerald) 13%, transparent) 453px, transparent 453px),
-    radial-gradient(circle at 50% 85%, transparent 250px, color-mix(in srgb, var(--charcoal) 11%, transparent) 250px, color-mix(in srgb, var(--charcoal) 11%, transparent) 253px, transparent 253px);
+    radial-gradient(circle at 50% 85%, transparent 250px, color-mix(in srgb, var(--white) 11%, transparent) 250px, color-mix(in srgb, var(--charcoal) 11%, transparent) 253px, transparent 253px);
 
   background-size: 
     80px 140px, 80px 140px, 
@@ -95,6 +118,93 @@ body {
 
   background-attachment: fixed;
   animation: driftWaves 20s ease-in-out infinite alternate;
+}
+
+.dashboard-container {
+  position: relative;
+  z-index: 10;
+  margin-top: 100px;
+  width: 90%;
+  max-width: 1100px;
+  text-align: center;
+}
+
+.title-primary {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--retro-green);
+  font-size: 2.4rem;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  color: var(--gold-light);
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+.game-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 35px;
+}
+
+.tab-btn {
+  background: rgba(11, 41, 18, 0.8);
+  border: 2px solid var(--gold);
+  color: var(--white);
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  border-color: var(--retro-green);
+  background: var(--retro-green);
+  color: var(--midnight-emerald);
+  box-shadow: 0 0 15px rgba(0, 200, 83, 0.4);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.nav-card {
+  background: rgba(15, 25, 0.7);
+  border: 1px solid var(--dark-gold);
+  border-radius: 12px;
+  padding: 30px 20px;
+  text-decoration: none;
+  color: var(--white);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  backdrop-filter: blur(4px);
+}
+
+.nav-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+  box-shadow: 0 8px 25px rgba(225, 169, 40, 0.25);
+}
+
+.card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.nav-card h2 {
+  color: var(--gold);
+  margin-bottom: 10px;
+  font-size: 1.3rem;
+}
+
+.nav-card p {
+  color: var(--gold-light);
+  font-size: 0.95rem;
 }
 
 @keyframes driftWaves {
@@ -241,8 +351,8 @@ img {
   left: 0;
   right: 0;
   height: 65px;
-  background-color: var(--gold-light, #eedbb0);
-  color: var(--midnight-emerald, #0B2912);
+  background-color: var(--midnight-emerald);
+  color: var(--dark-gold);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -305,7 +415,7 @@ img {
   font-size: 1.2rem;
   letter-spacing: 1px;
   text-align: right;
-  color: var(--midnight-emerald);
+  color: var(--dark-gold);
 }
 
 .header-logo {
@@ -398,4 +508,184 @@ img {
 .nav a.active {
   background: linear-gradient(90deg, var(--gold), var(--gold-light));
   color: #fff;
+}
+
+.sim-launch-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin: 30px 0;
+}
+
+.sim-btn {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  max-width: 380px;
+  padding: 18px 24px;
+  background: var(--dark-gold);
+  text-decoration: none;
+  color: #ffffff;
+  transition: all 0.25s ease-in-out;
+  backdrop-filter: blur(6px);
+}
+
+.sim-btn .btn-icon {
+  font-size: 2rem;
+}
+
+.sim-btn .btn-content {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.sim-btn .btn-title {
+  font-family: 'Orbitron', sans-serif, system-ui;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--charcoal);
+}
+
+.sim-btn .btn-desc {
+  font-size: 0.85rem;
+  color: var(--gold-light, #eedbb0);
+  margin-top: 3px;
+}
+
+.sim-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 200, 83, 0.3);
+}
+
+.btn-3D:hover .btn-title {
+  color: var(--retro-green);
+}
+
+.btn-2D:hover .btn-title {
+  color: var(--gold);
+}
+
+.header-sim-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 92px;
+  height: 34px;
+  padding: 0 8px;
+  font-family: 'Orbitron', sans-serif, system-ui;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  box-sizing: border-box;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
+}
+
+.header-sim-btn .btn-tag {
+  font-size: 0.7rem;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.btn-3D-compact {
+  background: var(--ftc-orange);
+  color: var(--white);
+}
+
+.btn-3D-compact:hover {
+  background: var(--white);
+  color: var(--ftc-orange);
+}
+
+.btn-3D-compact:hover .btn-tag {
+  background: var(--white);
+  color: var(--ftc-orange);
+}
+
+.btn-2D-compact {
+  background: var(--ftc-purple);
+  color: var(--white);
+}
+
+.btn-2D-compact:hover {
+  background: var(--white);
+  color: var(--ftc-purple);
+}
+
+/****************************************************************************
+************************ LEADERBOARD PAGE STYLINGS **************************
+****************************************************************************/
+.leaderboard-container {
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  display: flex;
+  gap: 20px;
+  margin-top: 100px;
+}
+
+.title-card {
+  display: flex;
+  width: 1400px;
+  height: 50px;
+  background-color: rgba(11, 41, 18, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.title-card-heading h2 {
+  font-family: 'Orbitron', sans-serif, system-ui;
+  font-size: 7.0rem;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  opacity: 1;
+}
+
+.index-section-container-1 {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 1400px;
+  height: 400px;
+  gap: 20px;
+  margin-top: 20px;
+  background-color: rgba(11, 41, 18, 0.5);
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(6, 143, 63, 0.788);
+  flex-direction: column;
+}
+
+.index-section-container-1 h2 {
+  font-family: 'Orbitron', sans-serif, system-ui;
+  font-size: 2.0rem;
+  font-weight: bold;
+  color: rgba(187, 149, 35, 1.0);
+  text-decoration: underline;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  opacity: 1;
+}
+
+.index-section-container-1 p {
+  font-family: 'Comfortaa', sans-serif, system-ui;
+  font-size: 17px;
+  font-weight: bold;
+  color: rgba(238, 219, 176, 1.0);
+  text-decoration: underline;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin-top: 7px;
+  opacity: 1;
 }

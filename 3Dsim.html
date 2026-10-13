@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FTC Simulator Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <header class="mobile-header">
+      <button class="hamburger-btn" aria-label="Toggle Navigation Menu">☰</button>
+      <div class="header-right-group">
+        <span class="mobile-brand">FTC SIMULATOR</span>
+        <img src="images/currentLogo.png" alt="Team Logo" class="header-logo">
+      </div>
+    </header>
+
+    <main class="dashboard-container">
+      <h1 class="title-primary">FTC ROBOTICS SIMULATOR</h1>
+      <p class="subtitle">Welcome to the FTC Robotics Simulator</p>
+      <p class="subtitle">Select a season map and module to launch!</p>
+
+      <div class="game-tabs">
+        <button class="tab-btn active" data-map="biobuzz">BIOBUZZ [2026-2027]</button>
+        <button class="tab-btn" data-map="decode">DECODE [2025-2026]</button>
+
+        <section class="card-grid">
+          <a href="sim3D.html" class="nav-card">
+            <div class="card-icon">🎮</div>
+            <h2>Driver Practice</h2>
+            <p>Launch the 3D Physics simulator and run driver practice sessions with custom controls and imported CAD files for your choice of robot!</p>
+
+            <a href="card-inspector.html" class="nav-card">
+              <div class="card-icon">🛠️</div>
+              <h2>CAD & BOT INSPECTION</h2>
+              <p>Upload Custom 3D Robot Models, Label Intake/Shooting, and Map Mechanisms.</p>
+            </a>
+
+            <a href="#code-editor" class="nav-card">
+              <div class="card-icon">💻</div>
+              <h2>Programming Interface</h2>
+              <p>Write and test both autonomous code in real-time against the simulation.</p>
+            </a>
+          </a>
+        </section>
+      </div>
+    </main>
+
+    <script src="floatingHexagons.js" defer>
+      
+    </script>
+  </body>
+</html>
