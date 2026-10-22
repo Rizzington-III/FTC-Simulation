@@ -2,6 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Prop+Double:wght@100..900&family=Monoton&family=Oxanium:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alien+Block&family=Bitcount+Prop+Double:wght@100..900&family=Monoton&family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alien+Block&family=Audiowide&family=Bitcount+Prop+Double:wght@100..900&family=Monoton&family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alien+Block&family=Audiowide&family=Bitcount+Prop+Double:wght@100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Monoton&family=Oxanium:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alien+Block&family=Audiowide&family=Bitcount+Prop+Double:wght@100..900&family=Black+Ops+One&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Monoton&family=Oxanium:wght@200..800&display=swap');
 
 :root {
   --midnight-emerald: #0B2912;
@@ -76,7 +79,12 @@ body {
   }
 }
 
-body {
+body.homepage {
+  background-color: var(--charcoal);
+  animation: none;
+}
+
+body.movement {
   margin: 0;
   font-family: 'Orbitron', 'Comfortaa', sans-serif;
 
@@ -118,15 +126,6 @@ body {
 
   background-attachment: fixed;
   animation: driftWaves 20s ease-in-out infinite alternate;
-}
-
-.dashboard-container {
-  position: relative;
-  z-index: 10;
-  margin-top: 100px;
-  width: 90%;
-  max-width: 1100px;
-  text-align: center;
 }
 
 .title-primary {
@@ -647,7 +646,7 @@ img {
   opacity: 1;
 }
 
-.index-section-container-1 {
+.leaderboard-section-container-1 {
   align-items: center;
   justify-content: center;
   display: flex;
@@ -661,7 +660,7 @@ img {
   flex-direction: column;
 }
 
-.index-section-container-1 h2 {
+.leaderboard-section-container-1 h2 {
   font-family: 'Orbitron', sans-serif, system-ui;
   font-size: 2.0rem;
   font-weight: bold;
@@ -675,7 +674,7 @@ img {
   opacity: 1;
 }
 
-.index-section-container-1 p {
+.leaderboard-section-container-1 p {
   font-family: 'Comfortaa', sans-serif, system-ui;
   font-size: 17px;
   font-weight: bold;
@@ -689,3 +688,66 @@ img {
   margin-top: 7px;
   opacity: 1;
 }
+
+/****************************************************************************
+*************************** INDEX PAGE STYLINGS *****************************
+****************************************************************************/
+
+.dashboard-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  justify-content: left;
+  text-align: center;
+  background-color: var(--charcoal);
+  flex-direction: column;
+  align-items: left;
+}
+
+.dashboard-title-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 750px;
+
+}
+
+.index-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: left;
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.index-title h1 {
+  font-family: 'Monoton', sans-serif, system-ui;
+  font-size: 250px;
+  color: var(--white);
+  letter-spacing: 5px;
+  /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); */
+  align-items: left;
+  justify-content: left;
+  margin-bottom: 0px;
+}
+
+.index-title h2 {
+  font-family: 'Monoton', sans-serif, system-ui;
+  font-size: 100px;
+  color: var(--dark-gold);
+  letter-spacing: 2px;
+  /* text-shadow: 0 0 10px rgba(255, 247, 204, 0.5), 0 0 20px rgba(244, 241, 182, 0.3); */
+  align-items: left;
+  justify-content: left;
+  margin-top: 0px;
+}
+
+span.index-presented-by span {
+  font-family: 'Josefin Sans', sans-serif, system-ui;
+  font-size: 40px;
+  color: var(--gold); 
+  background: linear-gradient(0deg, var(--gold), var(--gold-light));
+  border-radius: 20px;
+  }
