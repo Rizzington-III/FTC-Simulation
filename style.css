@@ -757,11 +757,26 @@ span.index-presented-by span {
  ========================================================================== */
 
 .fluid-write-container {
-  display: inline-block;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  align-items: flex-start;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
-  white-space: nowrap;
   padding: 10px 0;
+}
+
+.fluid-text {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  align-items: flex-start;
+  justify-content: left;
+  position: relative;
+  white-space: nowrap;
+  margin-top: 10px;
+  margin-left: 100px;
 }
 
 .fluid-text h2 {
@@ -770,10 +785,20 @@ span.index-presented-by span {
   color: var(--white);
   margin: 0;
   display: inline-block;
-  -webkit-text-stroke: 1px rgba(11, 41, 18, 0.5);
-  text-shadow: 0 0 10px rgba(0, 200, 83, 0.4);
   animation: monotonFluidFlow 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   will-change: clip-path, letter-spacing, filter;
+  align-items: flex-start;
+}
+
+.fluid-text h3 {
+  font-family: 'Monoton', cursive;
+  font-size: 100px;
+  color: var(--dark-gold);
+  margin: 0;
+  display: inline-block;
+  animation: monotonFluidFlow 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: clip-path, letter-spacing, filter;
+  align-items: flex-start;
 }
 
 @keyframes monotonFluidFlow {
@@ -788,19 +813,6 @@ span.index-presented-by span {
     letter-spacing: 5px;
     filter: blur(0px) opacity(1);
   }
-}
-
-.fluid-write-container::after {
-  content: '';
-  position: absolute;
-  top: 10%;
-  width: 6px;
-  bottom: 10%;
-  background: var(--gold);
-  border-radius: 50%;
-  filter: blur(1px);
-  box-shadow: 0 0 12px var(--gold), 0 0 24px var(--retro-green);
-  animation: monotonPenTip 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 @keyframes monotonPenTip {
