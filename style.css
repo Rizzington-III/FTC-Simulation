@@ -722,27 +722,27 @@ img {
   margin-left: 100px;
 }
 
-.index-title h1 {
+/* .index-title h1 {
   font-family: 'Monoton', sans-serif, system-ui;
   font-size: 250px;
   color: var(--white);
   letter-spacing: 5px;
-  /* text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 255, 255, 0.3); */
   align-items: left;
   justify-content: left;
   margin-bottom: 0px;
 }
 
+
 .index-title h2 {
   font-family: 'Monoton', sans-serif, system-ui;
+  font-weight: 100px;
   font-size: 100px;
   color: var(--dark-gold);
   letter-spacing: 2px;
-  /* text-shadow: 0 0 10px rgba(255, 247, 204, 0.5), 0 0 20px rgba(244, 241, 182, 0.3); */
   align-items: left;
   justify-content: left;
   margin-top: 0px;
-}
+} */
 
 span.index-presented-by span {
   font-family: 'Josefin Sans', sans-serif, system-ui;
@@ -750,4 +750,69 @@ span.index-presented-by span {
   color: var(--gold); 
   background: linear-gradient(0deg, var(--gold), var(--gold-light));
   border-radius: 20px;
+}
+
+/* ==========================================================================
+  Fluid Monoton Text Reveal & Styling
+ ========================================================================== */
+
+.fluid-write-container {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 10px 0;
+}
+
+.fluid-text h2 {
+  font-family: 'Monoton', cursive;
+  font-size: 250px;
+  color: var(--white);
+  margin: 0;
+  display: inline-block;
+  -webkit-text-stroke: 1px rgba(11, 41, 18, 0.5);
+  text-shadow: 0 0 10px rgba(0, 200, 83, 0.4);
+  animation: monotonFluidFlow 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: clip-path, letter-spacing, filter;
+}
+
+@keyframes monotonFluidFlow {
+  0% {
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    letter-spacing: 12px;
+    filter: blur(8px) opacity(0);
+  } 20% {
+    filter: blur(3px) opacity(0.8);
+  } 100% {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    letter-spacing: 5px;
+    filter: blur(0px) opacity(1);
   }
+}
+
+.fluid-write-container::after {
+  content: '';
+  position: absolute;
+  top: 10%;
+  width: 6px;
+  bottom: 10%;
+  background: var(--gold);
+  border-radius: 50%;
+  filter: blur(1px);
+  box-shadow: 0 0 12px var(--gold), 0 0 24px var(--retro-green);
+  animation: monotonPenTip 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes monotonPenTip {
+  0% {
+    left: 0%;
+    opacity: 0;
+  } 10% {
+    opacity: 1;
+  } 90% {
+    opacity: 1;
+  } 100% {
+    left: 10%;
+    opacity: 0;
+  }
+}
