@@ -828,3 +828,33 @@ span.index-presented-by span {
     opacity: 0;
   }
 }
+
+.hexagon {
+  position: absolute;
+  width: 90px;
+  height: 104px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  filter: drop-shadow(0 0 6px rgba(225, 169, 40, 0.5));
+  animation: floatAndSpin 45s ease-in-out infinite alternate;
+}
+
+.connection-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes floatAndSpin {
+  0% {
+    transform: translateY(0px, 0px) rotate(0deg);
+  } 33% {
+    transform: translate(25px, -35px) rotate(120deg);
+  } 66% {
+    transform: translate(-20px, 25px) rotate(240deg);
+  } 100% {
+    transform: translate(0px, 0px) rotate(360deg);
+  }
+}
