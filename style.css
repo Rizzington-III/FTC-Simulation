@@ -572,8 +572,6 @@ img {
   color: var(--gold-light);
 }
 
-/* Pages that carry the full navigation show the menu instead of a hamburger. */
-
 .header-logo {
   width: 45px;
   height: 45px;

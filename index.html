@@ -9,15 +9,34 @@
 
     <body class="homepage">
         <header class="mobile-header">
+            <a class="header-brand" href="index.html">FTC SIMULATOR</a>
+
+            <nav class="header-nav" id="headerNav" aria-label="Primary">
+                <a class="header-link" href="index.html" aria-current="page">
+                    <span>(HOME)</span> INDEX
+                </a>
+                <a class="header-link" href="PedroPath.html">
+                    <span>(2D SIM)</span> 2DPEDROPATH
+                </a>
+                <a class="header-link" href="3Dsim.html">
+                    <span>(3D SIM)</span> 3DSIM
+                </a>
+            </nav>
+
+            <button class="hamburger-btn" type="button" aria-label="Toggle Navigation Menu"
+                    aria-expanded="false" aria-controls="headerNav">☰</button>
         </header>
-        <div class="dashboard-container">
+
+        <main class="dashboard-container">
             <div class="fluid-write-container">
                 <div class="fluid-text">
-                    <h2>FTC</h2>
-                    <h3>SIMULATOR</h3>
-                </div>   
+                    <h2 class="ink-reveal">FTC</h2>
+                    <h3 class="ink-reveal">SIMULATOR</h3>
+                </div>
             </div>
-        </div>
-    </div>
+        </main>
+
+        <script src="headerNav.js" defer></script>
+        <script type="module" src="/orbitalRail.js"></script>
     </body>
 </html>
