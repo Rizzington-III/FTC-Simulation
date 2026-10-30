@@ -26,6 +26,15 @@
   --retro-green: #10ac51;
   --dark-gold: #bb9523;
 
+  /* Kinetic blueprint palette */
+  --obsidian: #0A0A0B;
+  --burnished-gold: #C5A059;
+  --lucent-gold: #FFD700;
+  --brass: #8E6F3E;
+  --brass-deep: #5D461E;
+  --ink-white: #EAEAEA;
+  --grid-gold: rgba(197, 160, 89, 0.18);
+
   /*-------------------------------*/
   /*
   Color Palette (rbga format):
@@ -80,8 +89,20 @@ body {
 }
 
 body.homepage {
-  background-color: var(--charcoal);
+  background-color: var(--obsidian);
   animation: none;
+  min-height: 180vh;
+}
+
+/* Subtle dashed gold drafting grid */
+body.homepage::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='84' height='84'%3E%3Cg fill='none' stroke='%23C5A059' stroke-opacity='0.3' stroke-width='1'%3E%3Cpath d='M10 0h42M0 10v42'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 84px 84px;
 }
 
 body.movement {
@@ -350,15 +371,16 @@ img {
   left: 0;
   right: 0;
   height: 65px;
-  background-color: var(--midnight-emerald);
-  color: var(--dark-gold);
+  background-color: var(--brass-deep);
+  color: var(--ink-white);
+  border-bottom: 1px solid rgba(197, 160, 89, 0.35);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   padding: 0 20px;
   z-index: 2000;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
-  margin-bottom: 20px;
+  box-shadow: 0 2px 18px rgba(0, 0, 0, 0.45);
 }
 
 /* .hamburger-btn {
@@ -394,13 +416,13 @@ img {
 }
 
 .hamburger-btn {
-  background-color: var(--midnight-emerald, #0B2912);
-  border: none;
-  color: var(--gold, #E1A928);
-  font-size: 1.5rem;
-  width: 42px;
-  height: 42px;
-  border-radius: 8px;
+  background-color: transparent;
+  border: 1px solid rgba(197, 160, 89, 0.5);
+  color: var(--burnished-gold);
+  font-size: 1.4rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 0;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -410,7 +432,139 @@ img {
 
 .hamburger-btn:hover {
   background-color: var(--gold);
-  color: var(--midnight-emerald);
+  color: var(--charcoal);
+}
+
+/* ==========================================================================
+   KINETIC HEADER NAVIGATION (Dark gold command bar)
+   ========================================================================== */
+
+.header-brand {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--burnished-gold);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-brand:hover {
+  color: var(--lucent-gold);
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-left: auto;
+}
+
+.header-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 12px 6px;
+  background: none;
+  border: none;
+  font-family: 'Oxanium', 'Orbitron', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--ink-white);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+
+.header-link > span {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--burnished-gold);
+}
+
+/* Structural support line: sits below the text and runs past the first and
+   last letters. It is a drawn rule, not a text underline. */
+.header-link::after {
+  content: "";
+  position: absolute;
+  left: 2px;
+  right: 2px;
+  bottom: 8px;
+  height: 1.5px;
+  background-color: var(--burnished-gold);
+  transition: height 0.2s ease, background-color 0.2s ease;
+}
+
+.header-link:hover,
+.header-link:focus-visible {
+  color: var(--lucent-gold);
+}
+
+.header-link:hover > span,
+.header-link:focus-visible > span {
+  color: var(--lucent-gold);
+}
+
+.header-link:hover::after,
+.header-link:focus-visible::after {
+  height: 3px;
+  background-color: var(--lucent-gold);
+}
+
+.header-link:focus-visible {
+  outline: 2px solid var(--lucent-gold);
+  outline-offset: 3px;
+}
+
+/* Pages that carry the full navigation show the menu instead of a hamburger. */
+.mobile-header:has(.header-nav) .hamburger-btn {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .mobile-header:has(.header-nav) .hamburger-btn {
+    display: flex;
+  }
+
+  .header-brand {
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+  }
+
+  .header-nav {
+    position: fixed;
+    top: 65px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    margin-left: 0;
+    padding: 10px 20px 16px;
+    background-color: var(--brass-deep);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  }
+
+  .header-nav.is-open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .header-link {
+    align-self: flex-start;
+    justify-content: flex-start;
+    padding: 12px 6px;
+  }
 }
 
 .header-right-group {
@@ -425,7 +579,7 @@ img {
   font-size: 1.2rem;
   letter-spacing: 1px;
   text-align: right;
-  color: var(--dark-gold);
+  color: var(--gold-light);
 }
 
 .header-logo {
@@ -796,47 +950,199 @@ span.index-presented-by span {
   color: var(--white);
   margin: 0;
   display: inline-block;
-  animation: monotonFluidFlow 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  will-change: clip-path, letter-spacing, filter;
+  letter-spacing: 5px;
   align-items: flex-start;
 }
 
 .fluid-text h3 {
   font-family: 'Monoton', cursive;
   font-size: 100px;
-  color: var(--dark-gold);
+  color: var(--burnished-gold);
   margin: 0;
   display: inline-block;
-  animation: monotonFluidFlow 3.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
-  will-change: clip-path, letter-spacing, filter;
+  letter-spacing: 5px;
   align-items: flex-start;
 }
 
-@keyframes monotonFluidFlow {
-  0% {
-    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-    letter-spacing: 12px;
-    filter: blur(8px) opacity(0);
-  } 20% {
-    filter: blur(3px) opacity(0.8);
-  } 100% {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    letter-spacing: 5px;
-    filter: blur(0px) opacity(1);
+@media (max-width: 900px) {
+  .fluid-text {
+    margin-left: 24px;
+  }
+
+  .fluid-text h2 {
+    font-size: 116px;
+  }
+
+  .fluid-text h3 {
+    font-size: 42px;
+    letter-spacing: 3px;
   }
 }
 
-@keyframes monotonPenTip {
-  0% {
-    left: 0%;
-    opacity: 0;
-  } 10% {
-    opacity: 1;
-  } 90% {
-    opacity: 1;
-  } 100% {
-    left: 10%;
-    opacity: 0;
+/* ==========================================================================
+  Ink-Flow Monoton Reveal
+  The glyphs are masked by ink blooms that spread out of several seed points
+  inside the word, so the letters are drawn from many directions at once.
+ ========================================================================== */
+
+@property --ink-1 { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --ink-2 { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --ink-3 { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --ink-4 { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --ink-5 { syntax: "<length>"; inherits: false; initial-value: 0px; }
+@property --ink-6 { syntax: "<length>"; inherits: false; initial-value: 0px; }
+
+@keyframes inkBloom1 { from { --ink-1: 0px; } to { --ink-1: 70rem; } }
+@keyframes inkBloom2 { from { --ink-2: 0px; } to { --ink-2: 70rem; } }
+@keyframes inkBloom3 { from { --ink-3: 0px; } to { --ink-3: 70rem; } }
+@keyframes inkBloom4 { from { --ink-4: 0px; } to { --ink-4: 70rem; } }
+@keyframes inkBloom5 { from { --ink-5: 0px; } to { --ink-5: 70rem; } }
+@keyframes inkBloom6 { from { --ink-6: 0px; } to { --ink-6: 70rem; } }
+
+.ink-reveal {
+  --ink-mask:
+    radial-gradient(circle at 4% 62%, #000 0 var(--ink-1), transparent calc(var(--ink-1) + 22px)),
+    radial-gradient(circle at 22% 24%, #000 0 var(--ink-2), transparent calc(var(--ink-2) + 22px)),
+    radial-gradient(circle at 41% 74%, #000 0 var(--ink-3), transparent calc(var(--ink-3) + 22px)),
+    radial-gradient(circle at 60% 30%, #000 0 var(--ink-4), transparent calc(var(--ink-4) + 22px)),
+    radial-gradient(circle at 79% 70%, #000 0 var(--ink-5), transparent calc(var(--ink-5) + 22px)),
+    radial-gradient(circle at 96% 36%, #000 0 var(--ink-6), transparent calc(var(--ink-6) + 22px));
+
+  -webkit-mask-image: var(--ink-mask);
+  mask-image: var(--ink-mask);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+
+  animation:
+    inkBloom1 2.6s cubic-bezier(0.45, 0, 0.55, 1) 0s both,
+    inkBloom2 2.6s cubic-bezier(0.45, 0, 0.55, 1) 0.1s both,
+    inkBloom3 2.6s cubic-bezier(0.45, 0, 0.55, 1) 0.18s both,
+    inkBloom4 2.6s cubic-bezier(0.45, 0, 0.55, 1) 0.26s both,
+    inkBloom5 2.6s cubic-bezier(0.45, 0, 0.55, 1) 0.08s both,
+    inkBloom6 2.6s cubic-bezier(0.45, 0, 0.55, 1) 0.22s both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ink-reveal {
+    animation: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* ==========================================================================
+  ORBITAL RAIL (Curved scroll spine + hexagonal waypoints + scroll dial)
+ ========================================================================== */
+
+body.homepage .dashboard-container {
+  background-color: transparent;
+  padding-top: 90px;
+  z-index: 1;
+}
+
+.orbital-rail {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(40vw, 520px);
+  height: 100vh;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.rail-curve {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rail-path {
+  fill: none;
+  stroke: var(--burnished-gold);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+.rail-path-glow {
+  stroke: var(--lucent-gold);
+  stroke-width: 6;
+  opacity: 0.07;
+  filter: blur(2px);
+}
+
+.rail-path-main {
+  opacity: 0.65;
+}
+
+.rail-hex {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  animation: railFloat 9s ease-in-out infinite alternate;
+}
+
+.rail-hex svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rail-hex polygon {
+  fill: rgba(197, 160, 89, 0.05);
+  stroke: var(--brass);
+  stroke-width: 1.4;
+  transition: stroke 0.4s ease, fill 0.4s ease, filter 0.4s ease;
+}
+
+.rail-hex:nth-child(odd) {
+  animation-duration: 12s;
+}
+
+.rail-hex.is-active polygon {
+  stroke: var(--lucent-gold);
+  fill: rgba(255, 215, 0, 0.1);
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.45));
+}
+
+@keyframes railFloat {
+  from { translate: 0 0; }
+  to { translate: 0 -14px; }
+}
+
+.scroll-dial .dial-halo {
+  fill: rgba(255, 215, 0, 0.06);
+  stroke: rgba(255, 215, 0, 0.3);
+  stroke-width: 1;
+  stroke-dasharray: 3 5;
+}
+
+.scroll-dial .dial-ring {
+  fill: rgba(10, 10, 11, 0.7);
+  stroke: var(--lucent-gold);
+  stroke-width: 2;
+}
+
+.scroll-dial .dial-core {
+  fill: var(--lucent-gold);
+}
+
+.scroll-dial .dial-tick {
+  stroke: var(--lucent-gold);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rail-hex {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .orbital-rail {
+    display: none;
   }
 }
 
